@@ -1,15 +1,26 @@
 package dev.roysnaim.storage.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotEmpty;
 
 @Entity
 public class Client {
     @Id
+    @GeneratedValue
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private Long id;
+    @NotEmpty
     private String firstName;
+    @NotEmpty
     private String lastName;
+    @NotEmpty
     private String mobile;
+
+    public Client() {
+    }
 
     public Client(Long id, String firstName, String lastName, String mobile) {
         this.id = id;

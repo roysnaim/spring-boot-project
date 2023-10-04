@@ -1,18 +1,34 @@
 package dev.roysnaim.storage.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
+import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
 public class Product {
     @Id
+    @GeneratedValue
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private Long id;
+    @NotEmpty
     private String name;
+    @NotEmpty
     private String description;
+    @NotEmpty
     private String category;
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    @CreationTimestamp
+    @Column(nullable = false, updatable = false)
     private LocalDateTime creationDate;
+
+    public Product() {
+    }
 
     public Product(Long id, String name, String description, String category, LocalDateTime creationDate) {
         this.id = id;
@@ -22,11 +38,10 @@ public class Product {
         this.creationDate = creationDate;
     }
 
-    public Product(String name, String description, String category, LocalDateTime creationDate) {
+    public Product(String name, String description, String category) {
         this.name = name;
         this.description = description;
         this.category = category;
-        this.creationDate = creationDate;
     }
 
     public Long getId() {
