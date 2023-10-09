@@ -1,9 +1,7 @@
 package dev.roysnaim.storage.service;
 
-import ch.qos.logback.core.CoreConstants;
 import dev.roysnaim.storage.model.Product;
 import dev.roysnaim.storage.repository.ProductRepository;
-import jakarta.persistence.EntityManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
